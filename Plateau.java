@@ -225,15 +225,16 @@ public class Plateau extends JPanel
         // verifier que les casse sont sur le plateau 
         if (isIn(arr))
         {
-            if (isIn(dep))
-            {
-                System.out.println("OUI");
-            }
+        	 if(dep.getTypeCase()==1 &&	arr.getTypeCase()==0 )
+             {
+                 return 1;
+             }     
             // savoir si  c'est un deplacement horizontale ou pas 
             if (dep.getOrdonnee() == arr.getOrdonnee())
             {
                 // savoir manger ou deplacer
-                if (Yote.abs(dep.getOrdonnee() - arr.getOrdonnee())>= 2) // supose que si deplacement sup 2 cest pour manger
+            	
+            	  if (Yote.abs(dep.getOrdonnee() - arr.getOrdonnee())>= 2) // supose que si deplacement sup 2 cest pour manger
                 {
                     if (verifieDeplacementVertPrise(dep,arr))
                     {
@@ -250,7 +251,7 @@ public class Plateau extends JPanel
                     {
                         return 1;
                     }
-                    else
+               else
                     {
                         return 0;
                     }
@@ -281,10 +282,10 @@ public class Plateau extends JPanel
                     }
                 }  
             }
-            else
-            {
-                return 0;
-            }           
+            
+            else {
+            	return 0;
+            }
         }
         else
         {
@@ -297,8 +298,10 @@ public class Plateau extends JPanel
 	if (coupValide (dep, arr) == 1)
         {
             // deplacer le pion
-            this.monPlateau[arr.getOrdonnee()][arr.getAbscisse()] = this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] ;
-            this.monPlateau[dep.getOrdonnee()][dep.getAbscisse()] = null;
+			arr.setPion(dep.getPion());
+			
+            dep.setPion(null);
+          
             return true;
         }
         
